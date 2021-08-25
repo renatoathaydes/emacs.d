@@ -1,0 +1,89 @@
+* Renato's shortcuts
+
+
+** Basics
+
+   - `C-x C-c` :: exit emacs
+   - `C-g`     :: abort command
+   - `C-h`     :: help
+   - x `C-h`   :: show bindings starting with `x`
+   - `M-`n x   :: repeat `x`, `n` times
+   - `C-u` x   :: repeat `x` 4 times. Repeat `C-u` for 16 times. 
+
+** Moving around
+
+   ***** Back and Forth
+
+   | Entity   | Back  | Forth | Help Message            |
+   |----------+-------+-------+-------------------------|
+   | line     | `C-p` | `C-n` | prev- and next-line     |
+   | word     | `M-b` | `M-f` | back- and forth-word    |
+   | char     | `C-b` | `C-f` | back- and forth-char    |
+   | sentence | `M-a` | `M-e` | above- and end-sentence |
+   | buffer   | `M-<` | `M->` | beginning/end of buffer |
+
+   ***** Others
+
+   - `M-r`   :: go to center/top/bottom
+   - `M-g g` :: goto-lineh
+   - `C-l`   :: center screen at point
+   - `C-u C-SPC` :: go back to previous mark (local buffer)
+   - `C-x C-SPC` :: go back to previous mark (global buffer)
+
+   *** Info
+   - `n`     :: next page
+   - `p`     :: previous page
+   - `C-u RET` :: follow link in new buffer
+   - `l`     :: go back
+   - `r`     :: go forward
+   - `<`     :: go up one level
+
+   *** Minibuffer
+   - `M-n`    :: next completion
+   - `M-p`    :: previous completion
+   - `C-s`    :: next option (ido completion)
+   - `C-r`    :: previous option (ido completion)
+     
+** Erasing Text
+
+   - `C-d`   :: delete character
+   - `C-k`   :: kill line
+   - `M-d`   :: kill word (forward)
+   - `M-DEL` :: kill word (backward)
+   - `C-x C-o` :: delete all but one blank line
+
+** Files
+   
+   - `C-x C-f` :: find files.
+   - `C-x C-d` :: list
+   - `C-x r m` :: make a bookmark
+   - `C-x r b` :: back to a bookmark.
+   - `C-x r l` :: list all bookmarks.
+
+** Buffers
+
+   - `C-x C-q`   :: toggle readonly mode
+
+** Copy/Paste
+
+   - `C-w` :: kill region (cut)
+   - `C-y` :: yank (paste)
+   - `M-w` :: copy region (copy)
+   - `C-SPACE` :: start mark (moving around extends selection)
+   - `M-h` :: mark paragraph
+   - `C-c C-d` :: duplicate line or region
+   - `C-M-h` :: mark function
+   - `C-x h` :: mark all
+
+** Run commands
+
+   - `M-x`      :: run command
+   - `C-u M-x`  :: run command with arguments
+
+** LSP Common
+
+   - `C-c C-c`    :: comment region
+   - `C-x C;`     :: comment line
+   - `C-x C-h`    :: show docs
+   - `C-x h`      :: move to docs when showing
+   - `M-l a a`    :: invoke code action

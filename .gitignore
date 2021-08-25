@@ -3,3 +3,5 @@
 !.gitignore
 !init.el
 !custom.el
+!bookmarks
+!my-shortcuts.org

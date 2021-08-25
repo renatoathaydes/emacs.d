@@ -1,4 +1,10 @@
 ;;; init.el --- Renato's Emacs init file
+
+;;; Commentary:
+;;
+;; Renato Athaydes' Emacs Config.
+;; 
+
 ;;; Code:
 
 ;;; Package repositories
