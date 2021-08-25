@@ -1,6 +1,21 @@
 ;;; init.el --- Renato's Emacs init file
 ;;; Code:
 
+;;; Package repositories
+(require 'package)
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("org" . "https://orgmode.org/elpa/")))
+
+;; Bootstrap 'use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-when-compile
+  (require 'use-package))
+(require 'bind-key)
+(setq use-package-always-ensure t)
+
 (eval-when-compile
   (require 'use-package))
 
@@ -19,9 +34,6 @@
 (tool-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
-
 ;; Fixes issue with https: https://emacs.stackexchange.com/questions/61386/package-refresh-hangs
 (custom-set-variables
  '(gnutls-algorithm-priority "normal:-vers-tls1.3"))
@@ -37,12 +49,6 @@
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
-
-;;; Package repositories
-(require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")))
 
 ;;; External packages
 
@@ -68,7 +74,8 @@
 (use-package ace-window :ensure t :bind ("C-<tab>" . 'ace-window))
 (use-package ivy :ensure t
   :bind (("\C-s" . 'swiper))
-  :init (ivy-mode) (counsel-mode))
+  :init (ivy-mode))
+(use-package counsel :after (ivy))
 
 ;; God mode (modal editing)
 (defun my-god-mode-update-cursor-type ()
@@ -171,6 +178,8 @@
   ;; Beautify org-mode: https://zzamboni.org/post/beautifying-org-mode-in-emacs/
   (setq org-hide-emphasis-markers t))
 
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
 
 (find-file "~/.emacs.d/init.el")
 
