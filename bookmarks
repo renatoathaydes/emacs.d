@@ -1,0 +1,37 @@
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8-emacs; mode: lisp-data -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("Org Mode Manual"
+ (front-context-string . "\nThe Org Manual\n")
+ (rear-context-string . "ion,  Up: (dir)\n")
+ (position . 930)
+ (filename . "/Users/renato/.emacs.d/elpa/org-20210816/org")
+ (info-node . "Top")
+ (handler . Info-bookmark-jump))
+("wasmin-lang"
+ (filename . "~/programming/projects/wasmin-lang/")
+ (front-context-string . "  /Users/renato/")
+ (rear-context-string)
+ (position . 1))
+("rustic"
+ (filename . "~/.emacs.d/elpa/rustic-20210805.1755/rustic-cargo.el")
+ (front-context-string . "\n    (or (rustic")
+ (rear-context-string . " (save-excursion")
+ (position . 6096))
+("init.el"
+ (filename . "~/.emacs.d/init.el")
+ (front-context-string . ";;; init.el --- ")
+ (rear-context-string)
+ (position . 1))
+("projects"
+ (filename . "~/programming/projects/")
+ (front-context-string . ".DS_Store\n  drwx")
+ (rear-context-string . "0K May 20 12:48 ")
+ (position . 246))
+("shortcuts"
+ (filename . "~/.emacs.d/my-shortcuts.org")
+ (front-context-string . "* Renato's\n\n** B")
+ (rear-context-string)
+ (position . 1))
+)
