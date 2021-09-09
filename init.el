@@ -39,6 +39,7 @@
 (global-hl-line-mode t)
 (tool-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
+(delete-selection-mode 1)
 
 ;; Fixes issue with https: https://emacs.stackexchange.com/questions/61386/package-refresh-hangs
 (custom-set-variables
@@ -55,6 +56,8 @@
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
+
+(global-set-key (kbd "s-r") 'revert-buffer-quick)
 
 ;;; External packages
 
