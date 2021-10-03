@@ -45,6 +45,14 @@
 (custom-set-variables
  '(gnutls-algorithm-priority "normal:-vers-tls1.3"))
 
+;; File backups
+(setq backup-directory-alist `(("." . "~/.emacs.d/.file-backups"))
+      backup-by-copying t
+      delete-old-versions t
+      kept-new-versions 10
+      kept-old-versions 5
+      version-control t)
+
 ;; highlight matching parens
 (electric-pair-mode 1)
 ;; electric-newline-add-maybe-indent shortcut is not needed,
@@ -56,8 +64,13 @@
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
-
 (global-set-key (kbd "s-r") 'revert-buffer-quick)
+
+;; jump back and forth between cursor positions
+(global-set-key (kbd "s-[") 'pop-global-mark)
+(global-set-key (kbd "s-]") #'(lambda ()
+                                (interactive)
+                                (set-mark-command t)))
 
 ;;; External packages
 
@@ -155,6 +168,18 @@
 
 ;; Groovy
 (use-package groovy-mode :ensure t)
+
+;; Go
+(use-package go-mode :ensure t
+  :hook ((go-mode . (lambda () (setq tab-width 4)))
+         (go-mode . lsp-deferred))
+  :init
+  (defun lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
+
+(use-package go-projectile :ensure t)
 
 ;; Inserts code snippets
 (use-package yasnippet :ensure t :init (yas-global-mode 1)

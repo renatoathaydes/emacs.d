@@ -12,7 +12,7 @@
  '(lsp-java-jdt-download-url
    "http://download.eclipse.org/jdtls/milestones/1.3.0/jdt-language-server-1.3.0-202108171748.tar.gz")
  '(package-selected-packages
-   '(counsel zenburn-theme rainbow-delimiters diff-hl crux rustic move-text god-mode expand-region ido-completing-read+ do-completing-read+ dap-java flycheck-gradle groovy-imports groovy-mode java-imports java-snippets which-key lsp-java lsp-ui treemacs ob-rust magit rust-mode markdown-mode projectile sr-speedbar blue-sea use-package slime-company org)))
+   '(company-go go-projectile go-mode counsel zenburn-theme rainbow-delimiters diff-hl crux rustic move-text god-mode expand-region ido-completing-read+ do-completing-read+ dap-java flycheck-gradle groovy-imports groovy-mode java-imports java-snippets which-key lsp-java lsp-ui treemacs ob-rust magit rust-mode markdown-mode projectile sr-speedbar blue-sea use-package slime-company org)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -22,7 +22,8 @@
  '(header-line ((t (:background "gray26" :foreground "#333333"))))
  '(highlight ((t nil)))
  '(hl-line ((t (:extend t :background "gray20"))))
- '(mode-line-highlight ((t (:box (:line-width (2 . 2) :color "grey40" :style released-button)))))
+ '(mode-line ((t (:background "dark magenta" :foreground "#eeeeec"))))
+ '(mode-line-highlight ((t (:box (:line-width (2 . 2) :color "light green" :style released-button)))))
  '(mode-line-inactive ((t (:background "gray0" :foreground "gray48"))))
  '(org-document-title ((t (:inherit default :weight bold :foreground "Grey" :font "Lucida Grande" :height 2.0 :underline nil))))
  '(org-level-1 ((t (:inherit default :foreground "Grey" :slant normal :weight bold :height 2.75 :width normal :foundry "nil" :family "Lucida Grande"))))

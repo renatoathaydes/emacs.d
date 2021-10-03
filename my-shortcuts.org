@@ -25,7 +25,7 @@
    ***** Others
 
    - `M-r`   :: go to center/top/bottom
-   - `M-g g` :: goto-lineh
+   - `M-g g` :: goto-line
    - `C-l`   :: center screen at point
    - `C-u C-SPC` :: go back to previous mark (local buffer)
    - `C-x C-SPC` :: go back to previous mark (global buffer)
@@ -75,6 +75,11 @@
    - `C-M-h` :: mark function
    - `C-x h` :: mark all
 
+** Search/Replace
+
+   - `C-s`    :: search
+   - `C-s M-q :: search-replace (then ?, y, n...)
+   
 ** Run commands
 
    - `M-x`      :: run command
