@@ -212,6 +212,15 @@
   ;; Beautify org-mode: https://zzamboni.org/post/beautifying-org-mode-in-emacs/
   (setq org-hide-emphasis-markers t))
 
+(use-package elfeed
+  :ensure t
+  :init
+  (setq elfeed-feeds
+        '("http://nullprogram.com/feed/"
+          "https://renato.athaydes.com/news/index.xml"
+          "https://planet.emacslife.com/atom.xml"
+          "https://ziglang.org/news/index.xml")))
+
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 

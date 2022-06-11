@@ -12,7 +12,7 @@
  '(lsp-java-jdt-download-url
    "http://download.eclipse.org/jdtls/milestones/1.3.0/jdt-language-server-1.3.0-202108171748.tar.gz")
  '(package-selected-packages
-   '(company-go go-projectile go-mode counsel zenburn-theme rainbow-delimiters diff-hl crux rustic move-text god-mode expand-region ido-completing-read+ do-completing-read+ dap-java flycheck-gradle groovy-imports groovy-mode java-imports java-snippets which-key lsp-java lsp-ui treemacs ob-rust magit rust-mode markdown-mode projectile sr-speedbar blue-sea use-package slime-company org)))
+   '(elfeed company-go go-projectile go-mode counsel zenburn-theme rainbow-delimiters diff-hl crux rustic move-text god-mode expand-region ido-completing-read+ do-completing-read+ dap-java flycheck-gradle groovy-imports groovy-mode java-imports java-snippets which-key lsp-java lsp-ui treemacs ob-rust magit rust-mode markdown-mode projectile sr-speedbar blue-sea use-package slime-company org)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
