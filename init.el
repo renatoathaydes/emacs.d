@@ -34,8 +34,10 @@
 (setq dired-listing-switches "-alh")
 (display-time-mode t)
 (show-paren-mode t)
+(display-line-numbers-mode t)
 (setq tab-width 2)
 (setq-default indent-tabs-mode nil)
+(setq-default css-indent-offset 2)
 (global-hl-line-mode t)
 (tool-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -72,6 +74,9 @@
                                 (interactive)
                                 (set-mark-command t)))
 
+;; comment-uncomment region
+(global-set-key (kbd "s-/") 'comment-or-uncomment-region)
+
 ;;; External packages
 
 ;; auto-complete inside text/code buffers
@@ -98,6 +103,8 @@
   :bind (("\C-s" . 'swiper))
   :init (ivy-mode))
 (use-package counsel :after (ivy))
+(use-package multiple-cursors
+  :bind (("s-;" . 'mc/edit-lines)))
 
 ;; God mode (modal editing)
 (defun my-god-mode-update-cursor-type ()
@@ -118,6 +125,9 @@
   :config (setq slime-company-completion 'fuzzy
                 slime-company-after-completion 'slime-company-just-one-space))
 
+(use-package yaml-mode :ensure t
+  :init (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode)))
+
 ;; LSP (Language Server Protocol) - support for multiple languages
 (use-package lsp-mode
   :hook ((lsp-mode . lsp-enable-which-key-integration))
@@ -125,6 +135,7 @@
   (setq lsp-completion-enable t lsp-enable-on-type-formatting t)
   (global-set-key (kbd "M-s-l") 'lsp-format-buffer)
   (global-set-key (kbd "C-c h") 'lsp-ui-doc-focus-frame)
+  (global-set-key (kbd "s-b") 'lsp-find-references)
   :hook ((lsp-mode . lsp-enable-which-key-integration)))
 
 ;; shows up code actions, documentation etc. on the screen
@@ -132,9 +143,33 @@
   :bind (:map lsp-mode-map ("C-c C-h" . lsp-ui-doc-glance))
   :config (setq lsp-ui-doc-enable nil))
 
+;; (add-hook 'dart-mode-hook 'lsp)
+;; Dart
+(use-package dart-mode :ensure t)
+(use-package lsp-dart :ensure t
+  :hook ((dart-mode . lsp-deferred)))
+
 ;; Rust
 (use-package rustic :ensure t)
 (use-package ob-rust :ensure t)
+
+;; ZIG
+(use-package zig-mode :ensure t
+  :bind (("C-x C-t" . zig-test-buffer))
+  :custom (zig-format-on-save nil)
+  :init
+  (setq lsp-zig-zls-executable (mapconcat #'identity (list (getenv "HOME") "/programming/apps/zls/zls") ""))
+  (add-hook 'zig-mode-hook #'lsp-deferred))
+
+;; Lua and Terra
+(use-package lua-mode :ensure t
+  :custom
+  (lsp-clients-lua-language-server-bin "/usr/local/bin/lua-language-server")
+  (lsp-clients-lua-language-server-install-dir "/usr/local/Cellar/lua-language-server/3.3.0")
+  (lsp-clients-lua-language-server-main-location "/usr/local/Cellar/lua-language-server/3.3.0/libexec/main.lua")
+  :hook (lua-mode . lsp-deferred))
+(use-package terra-mode
+  :load-path "manual-packages")
 
 ;; Java
 (use-package lsp-java
@@ -173,6 +208,8 @@
 (use-package go-mode :ensure t
   :hook ((go-mode . (lambda () (setq tab-width 4)))
          (go-mode . lsp-deferred))
+  :custom
+  (lsp-go-gopls-server-path "/Users/renato/go/bin/gopls")
   :init
   (defun lsp-go-install-save-hooks ()
     (add-hook 'before-save-hook #'lsp-format-buffer t t)
@@ -194,13 +231,19 @@
   :bind (("C-a" . crux-move-beginning-of-line)
          ("s-<return>" . crux-smart-open-line)
          ("s-S-<return>" . crux-smart-open-line-above)
-         ("C-c C-d" . crux-duplicate-current-line-or-region)
+         ("C-c d" . crux-duplicate-current-line-or-region)
          ("C-c k" . crux-kill-other-buffers)))
 
 ;; Projectile adds support for projects
 (use-package projectile
   :ensure t
-  :init (projectile-mode +1)
+  :init (progn
+          (projectile-mode +1)
+          (projectile-register-project-type 'jbuild '("jbuild.yaml")
+                                            :project-file "jbuild.yaml"
+				            :compile "jb compile"
+				            :test "jb -p test test"
+				            :run "jb run"))
   :bind (:map projectile-mode-map
               ("s-p" . projectile-command-map)))
 ;; Org-mode
@@ -221,8 +264,16 @@
           "https://planet.emacslife.com/atom.xml"
           "https://ziglang.org/news/index.xml")))
 
+(use-package vterm :ensure t)
+
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
+
+;; Helpful functions (available everywhere, including eshell)
+(defun j11 ()
+    (setenv "JAVA_HOME" "/Users/renato/.sdkman/candidates/java/11.0.13-zulu"))
+(defun j17 ()
+    (setenv "JAVA_HOME" "/Users/renato/.sdkman/candidates/java/17.0.5-zulu"))
 
 (find-file "~/.emacs.d/init.el")
 
