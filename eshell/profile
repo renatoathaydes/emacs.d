@@ -1,0 +1,10 @@
+j11 > /dev/null
+alias jb '/Users/renato/programming/projects/jbuild-cli/build/bin/jb $*'
+alias jbuild 'java -jar /Users/renato/programming/projects/jbuild/build/jbuild.jar $*'
+alias rawhttp 'java -jar /Users/renato/programming/apps/rawhttp-jdk17.jar $*'
+
+setenv "PATH" (concat (shell-command-to-string "$SHELL --login -c 'echo -n $PATH'") ":/Users/renato/.pub-cache/bin") > /dev/null
+
+addpath ~/.pub-cache/bin/ > /dev/null
+
+(propertize "==============================" 'font-lock-face '(:foreground "yellow" :background "blue"))

@@ -6,6 +6,10 @@
 !bookmarks
 !my-shortcuts.org
 !renato-eclipse-formatting.xml
+
+!*/
+elpa/
+
 !eshell/profile
 !eshell/alias
 
