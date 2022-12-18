@@ -1,3 +1,3 @@
-alias rawhttp java -jar /Users/renato/programming/apps/rawhttp-jdk17.jar $*
-alias jbuild java -jar /Users/renato/programming/projects/jbuild/build/jbuild.jar $*
-alias jb /Users/renato/programming/projects/jbuild-cli/build/bin/jb $*
+alias rawhttp java -jar ~/programming/apps/rawhttp-jdk17.jar $*
+alias jbuild java -jar ~/programming/projects/jbuild/build/jbuild.jar $*
+alias jb ~/programming/projects/jb/build/bin/jb $*
