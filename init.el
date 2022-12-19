@@ -134,6 +134,7 @@
   :config
   (setq lsp-completion-enable t lsp-enable-on-type-formatting t)
   (global-set-key (kbd "M-s-l") 'lsp-format-buffer)
+  (global-set-key (kbd "<M-return>") 'lsp-execute-code-action)
   (global-set-key (kbd "C-c h") 'lsp-ui-doc-focus-frame)
   (global-set-key (kbd "s-b") 'lsp-find-references)
   :hook ((lsp-mode . lsp-enable-which-key-integration)))
