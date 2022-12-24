@@ -265,8 +265,6 @@
           "https://planet.emacslife.com/atom.xml"
           "https://ziglang.org/news/index.xml")))
 
-(use-package vterm :ensure t)
-
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
