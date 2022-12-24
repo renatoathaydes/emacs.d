@@ -108,6 +108,7 @@
 
 ;; God mode (modal editing)
 (defun my-god-mode-update-cursor-type ()
+  "Change God mode cursor type."
   (setq cursor-type (if (or god-local-mode buffer-read-only) 'box 'bar)))
 (use-package god-mode :ensure t
   :bind (("<escape>" . #'god-mode-all))
@@ -180,6 +181,7 @@
          lsp-java-completion-max-results 20))
 
 (defun my-java-mode-hook ()
+  "Custom Java hook."
   (auto-fill-mode)
   (subword-mode))
 (add-hook 'java-mode-hook 'my-java-mode-hook)
@@ -270,9 +272,11 @@
 
 ;; Helpful functions (available everywhere, including eshell)
 (defun j11 ()
-    (setenv "JAVA_HOME" "/Users/renato/.sdkman/candidates/java/11.0.13-zulu"))
+  "Use Java 11."
+  (setenv "JAVA_HOME" (expand-file-name "~/.sdkman/candidates/java/11.0.13-zulu")))
 (defun j17 ()
-    (setenv "JAVA_HOME" "/Users/renato/.sdkman/candidates/java/17.0.5-zulu"))
+  "Use Java 17."
+  (setenv "JAVA_HOME" (expand-file-name "~/.sdkman/candidates/java/17.0.5-zulu")))
 
 (find-file "~/.emacs.d/init.el")
 
