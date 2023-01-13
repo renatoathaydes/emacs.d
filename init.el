@@ -138,6 +138,7 @@
   (global-set-key (kbd "<M-return>") 'lsp-execute-code-action)
   (global-set-key (kbd "C-c h") 'lsp-ui-doc-focus-frame)
   (global-set-key (kbd "s-b") 'lsp-find-references)
+  (global-set-key (kbd "C-SPC") 'completion-at-point)
   :hook ((lsp-mode . lsp-enable-which-key-integration)))
 
 ;; shows up code actions, documentation etc. on the screen
@@ -219,6 +220,8 @@
     (add-hook 'before-save-hook #'lsp-organize-imports t t))
   (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
 
+(use-package unison-mode)
+
 (use-package go-projectile :ensure t)
 
 ;; Inserts code snippets
@@ -234,7 +237,7 @@
   :bind (("C-a" . crux-move-beginning-of-line)
          ("s-<return>" . crux-smart-open-line)
          ("s-S-<return>" . crux-smart-open-line-above)
-         ("C-c d" . crux-duplicate-current-line-or-region)
+         ("s-d" . crux-duplicate-current-line-or-region)
          ("C-c k" . crux-kill-other-buffers)))
 
 ;; Projectile adds support for projects
@@ -267,6 +270,13 @@
           "https://planet.emacslife.com/atom.xml"
           "https://ziglang.org/news/index.xml")))
 
+(use-package dashboard
+  :ensure t
+  :init
+  (setq dashboard-items '((recents  . 15) (projects . 5) (registers . 5)))
+  :config
+  (dashboard-setup-startup-hook))
+
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
@@ -277,8 +287,6 @@
 (defun j17 ()
   "Use Java 17."
   (setenv "JAVA_HOME" (expand-file-name "~/.sdkman/candidates/java/17.0.5-zulu")))
-
-(find-file "~/.emacs.d/init.el")
 
 (provide 'init)
 
