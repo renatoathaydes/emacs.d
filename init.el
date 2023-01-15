@@ -134,6 +134,7 @@
   :hook ((lsp-mode . lsp-enable-which-key-integration))
   :config
   (setq lsp-completion-enable t lsp-enable-on-type-formatting t)
+  (setq lsp-ui-sideline-enable nil)
   (global-set-key (kbd "M-s-l") 'lsp-format-buffer)
   (global-set-key (kbd "<M-return>") 'lsp-execute-code-action)
   (global-set-key (kbd "C-c h") 'lsp-ui-doc-focus-frame)
@@ -164,15 +165,13 @@
   (setq lsp-zig-zls-executable (mapconcat #'identity (list (getenv "HOME") "/programming/apps/zls/zls") ""))
   (add-hook 'zig-mode-hook #'lsp-deferred))
 
-;; Lua and Terra
+;; Lua
 (use-package lua-mode :ensure t
   :custom
   (lsp-clients-lua-language-server-bin "/usr/local/bin/lua-language-server")
   (lsp-clients-lua-language-server-install-dir "/usr/local/Cellar/lua-language-server/3.3.0")
   (lsp-clients-lua-language-server-main-location "/usr/local/Cellar/lua-language-server/3.3.0/libexec/main.lua")
   :hook (lua-mode . lsp-deferred))
-(use-package terra-mode
-  :load-path "manual-packages")
 
 ;; Java
 (use-package lsp-java
@@ -219,8 +218,6 @@
     (add-hook 'before-save-hook #'lsp-format-buffer t t)
     (add-hook 'before-save-hook #'lsp-organize-imports t t))
   (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
-
-(use-package unison-mode)
 
 (use-package go-projectile :ensure t)
 
@@ -280,14 +277,8 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
-;; Helpful functions (available everywhere, including eshell)
-(defun j11 ()
-  "Use Java 11."
-  (setenv "JAVA_HOME" (expand-file-name "~/.sdkman/candidates/java/11.0.13-zulu")))
-(defun j17 ()
-  "Use Java 17."
-  (setenv "JAVA_HOME" (expand-file-name "~/.sdkman/candidates/java/17.0.5-zulu")))
-
 (provide 'init)
+(load "~/.emacs.d/functions")
+(load "~/.emacs.d/my-unison-mode")
 
 ;;; init.el ends here
