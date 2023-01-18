@@ -25,6 +25,14 @@
      (insert "ucm")
      (funcall (lookup-key (current-local-map) (kbd "RET"))))))
 
+(defun workspace-lisp ()
+  "Open a SLIME workspace."
+  (interactive)
+  (functions/workspace2
+   (lambda ()
+     (find-file "~/programming/experiments/lisp/scratch.lisp"))
+   (lambda () (slime))))
+
 (defun functions/workspace2 (buffer-left buffer-right)
   "Open the Unison scratch next to a shell running UCM.
 `BUFFER-LEFT` should be a function that runs while on the left buffer.
