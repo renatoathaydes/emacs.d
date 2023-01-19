@@ -190,7 +190,12 @@
 ;; https://gist.github.com/fbricon/30c5971f7e492c8a74ca2b2d7a7bb966
 
 ;; Debugger
-(use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
+(use-package dap-mode :after lsp-mode
+  :config (dap-auto-configure-mode)
+  :init (progn
+          (global-set-key (kbd "<f7>") 'dap-step-in)
+          (global-set-key (kbd "<f8>") 'dap-next)
+          (global-set-key (kbd "<f9>") 'dap-continue)))
 ;; (use-package dap-java :ensure nil)
 ;; (use-package helm-lsp)
 ;; (use-package helm
@@ -200,9 +205,6 @@
 ;;   :ensure t
 ;;   :after (lsp-java)
 ;;   :config
-;;   (global-set-key (kbd "<f7>") 'dap-step-in)
-;;   (global-set-key (kbd "<f8>") 'dap-next)
-;;   (global-set-key (kbd "<f9>") 'dap-continue))
 
 ;; Groovy
 (use-package groovy-mode :ensure t)
