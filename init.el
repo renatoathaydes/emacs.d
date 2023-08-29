@@ -13,17 +13,7 @@
                          ("melpa" . "https://melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")))
 
-;; Bootstrap 'use-package'
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(eval-when-compile
-  (require 'use-package))
 (require 'bind-key)
-(setq use-package-always-ensure t)
-
-(eval-when-compile
-  (require 'use-package))
 
 (put 'erase-buffer 'disabled nil)
 (setq inhibit-splash-screen t)
@@ -44,8 +34,8 @@
 (delete-selection-mode 1)
 
 ;; Fixes issue with https: https://emacs.stackexchange.com/questions/61386/package-refresh-hangs
-(custom-set-variables
- '(gnutls-algorithm-priority "normal:-vers-tls1.3"))
+;;(custom-set-variables
+;; '(gnutls-algorithm-priority "normal:-vers-tls1.3"))
 
 ;; File backups
 (setq backup-directory-alist `(("." . "~/.emacs.d/.file-backups"))
@@ -77,6 +67,12 @@
 ;; comment-uncomment region
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region)
 
+;; start marking a region
+(global-set-key (kbd "C-,") 'set-mark-command)
+
+;; unindent
+(global-set-key (kbd "<backtab>") 'indent-rigidly-left-to-tab-stop)
+
 ;;; External packages
 
 ;; auto-complete inside text/code buffers
@@ -102,9 +98,9 @@
 (use-package ivy :ensure t
   :bind (("\C-s" . 'swiper))
   :init (ivy-mode))
-(use-package counsel :after (ivy))
-(use-package multiple-cursors
-  :bind (("s-;" . 'mc/edit-lines)))
+(use-package counsel :ensure t :after (ivy))
+;;(use-package multiple-cursors :ensure t
+;;  :bind (("s-;" . 'mc/edit-lines)))
 
 ;; God mode (modal editing)
 (defun my-god-mode-update-cursor-type ()
@@ -129,107 +125,31 @@
 (use-package yaml-mode :ensure t
   :init (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode)))
 
-;; LSP (Language Server Protocol) - support for multiple languages
-(use-package lsp-mode
-  :hook ((lsp-mode . lsp-enable-which-key-integration))
-  :config
-  (setq lsp-completion-enable t lsp-enable-on-type-formatting t)
-  (setq lsp-ui-sideline-enable nil)
-  (global-set-key (kbd "M-s-l") 'lsp-format-buffer)
-  (global-set-key (kbd "<M-return>") 'lsp-execute-code-action)
-  (global-set-key (kbd "C-c h") 'lsp-ui-doc-focus-frame)
-  (global-set-key (kbd "s-b") 'lsp-find-references)
-  (global-set-key (kbd "C-SPC") 'completion-at-point)
-  :hook ((lsp-mode . lsp-enable-which-key-integration)))
-
-;; shows up code actions, documentation etc. on the screen
-(use-package lsp-ui
-  :bind (:map lsp-mode-map ("C-c C-h" . lsp-ui-doc-glance))
-  :config (setq lsp-ui-doc-enable nil))
-
 ;; (add-hook 'dart-mode-hook 'lsp)
 ;; Dart
 (use-package dart-mode :ensure t)
-(use-package lsp-dart :ensure t
-  :hook ((dart-mode . lsp-deferred)))
-
-;; Rust
-(use-package rustic :ensure t)
-(use-package ob-rust :ensure t)
 
 ;; ZIG
 (use-package zig-mode :ensure t
   :bind (("C-x C-t" . zig-test-buffer))
-  :custom (zig-format-on-save nil)
-  :init
-  (setq lsp-zig-zls-executable (mapconcat #'identity (list (getenv "HOME") "/programming/apps/zls/zls") ""))
-  (add-hook 'zig-mode-hook #'lsp-deferred))
+  :custom (zig-format-on-save nil))
 
 ;; Lua
-(use-package lua-mode :ensure t
-  :custom
-  (lsp-clients-lua-language-server-bin "/usr/local/bin/lua-language-server")
-  (lsp-clients-lua-language-server-install-dir "/usr/local/Cellar/lua-language-server/3.3.0")
-  (lsp-clients-lua-language-server-main-location "/usr/local/Cellar/lua-language-server/3.3.0/libexec/main.lua")
-  :hook (lua-mode . lsp-deferred))
-
-;; Java
-(use-package lsp-java
-  :config (add-hook 'java-mode-hook 'lsp)
-  :init (setq
-         ;; Fetch less results from the Eclipse server
-         lsp-java-completion-max-results 20))
-
-(defun my-java-mode-hook ()
-  "Custom Java hook."
-  (auto-fill-mode)
-  (subword-mode))
-(add-hook 'java-mode-hook 'my-java-mode-hook)
+(use-package lua-mode :ensure t)
 
 ;; TODO edit Java formatter in emacs
 ;; https://gist.github.com/fbricon/30c5971f7e492c8a74ca2b2d7a7bb966
-
-;; Debugger
-(use-package dap-mode :after lsp-mode
-  :config (dap-auto-configure-mode)
-  :init (progn
-          (global-set-key (kbd "<f7>") 'dap-step-in)
-          (global-set-key (kbd "<f8>") 'dap-next)
-          (global-set-key (kbd "<f9>") 'dap-continue)))
-;; (use-package dap-java :ensure nil)
-;; (use-package helm-lsp)
-;; (use-package helm
-;; :config (helm-mode))
-
-;; (use-package dap-java
-;;   :ensure t
-;;   :after (lsp-java)
-;;   :config
 
 ;; Groovy
 (use-package groovy-mode :ensure t)
 
 ;; Go
 (use-package go-mode :ensure t
-  :hook ((go-mode . (lambda () (setq tab-width 4)))
-         (go-mode . lsp-deferred))
-  :custom
-  (lsp-go-gopls-server-path "/Users/renato/go/bin/gopls")
-  :init
-  (defun lsp-go-install-save-hooks ()
-    (add-hook 'before-save-hook #'lsp-format-buffer t t)
-    (add-hook 'before-save-hook #'lsp-organize-imports t t))
-  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
-
-(use-package go-projectile :ensure t)
+  :hook ((go-mode . (lambda () (setq tab-width 4)))))
 
 ;; Inserts code snippets
 (use-package yasnippet :ensure t :init (yas-global-mode 1)
   :bind (("C-j" . yas-insert-snippet)))
-
-;; Fancy project tree
-(use-package treemacs :ensure t)
-(use-package lsp-treemacs :ensure t)
 
 ;; Crux provides a few helpful basic functions
 (use-package crux :ensure t
@@ -239,18 +159,6 @@
          ("s-d" . crux-duplicate-current-line-or-region)
          ("C-c k" . crux-kill-other-buffers)))
 
-;; Projectile adds support for projects
-(use-package projectile
-  :ensure t
-  :init (progn
-          (projectile-mode +1)
-          (projectile-register-project-type 'jbuild '("jbuild.yaml")
-                                            :project-file "jbuild.yaml"
-				            :compile "jb compile"
-				            :test "jb -p test test"
-				            :run "jb run"))
-  :bind (:map projectile-mode-map
-              ("s-p" . projectile-command-map)))
 ;; Org-mode
 (use-package org
   :ensure t
