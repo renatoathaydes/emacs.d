@@ -184,11 +184,12 @@
   :config
   (dashboard-setup-startup-hook))
 
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
-
 (provide 'init)
 (load "~/.emacs.d/functions")
 (load "~/.emacs.d/my-unison-mode")
+
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
 
 ;;; init.el ends here
