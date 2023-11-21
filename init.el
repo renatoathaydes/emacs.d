@@ -50,7 +50,9 @@
 ;; electric-newline-add-maybe-indent shortcut is not needed,
 ;; I want this for inserting snippets as in IntelliJ
 (global-unset-key (kbd "C-j"))
-(setq inferior-lisp-program "/usr/local/bin/sbcl")
+(setq inferior-lisp-program (if (eq system-type 'gnu/linux)
+                                "/usr/bin/sbcl"
+                              "/usr/local/bin/sbcl"))
 
 ;; enable recentf to display recently visited files
 (recentf-mode 1)
