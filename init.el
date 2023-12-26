@@ -75,6 +75,8 @@
 ;; unindent
 (global-set-key (kbd "<backtab>") 'indent-rigidly-left-to-tab-stop)
 
+(global-set-key (kbd "M-s-l") 'eglot-format-buffer)
+
 ;;; External packages
 
 ;; auto-complete inside text/code buffers
@@ -126,6 +128,25 @@
 
 (use-package yaml-mode :ensure t
   :init (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode)))
+
+;; D
+(use-package d-mode :ensure t
+  :init (with-eval-after-load 'eglot
+          (add-to-list 'eglot-server-programs
+                       '(d-mode . ("~/programming/apps/serve-d")))))
+
+;; Nim
+(use-package nim-mode :ensure t
+  :init (with-eval-after-load 'eglot
+          (add-to-list 'eglot-server-programs
+                       '(nim-mode . ("nimlsp")))))
+
+;; Rust
+(use-package rustic :ensure t
+  :config
+  (setq rustic-lsp-client 'eglot)
+  :custom
+  (rustic-analyzer-command '("rustup" "run" "stable" "rust-analyzer")))
 
 ;; (add-hook 'dart-mode-hook 'lsp)
 ;; Dart
