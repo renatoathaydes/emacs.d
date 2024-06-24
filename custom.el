@@ -10,7 +10,7 @@
    '("3b8284e207ff93dfc5e5ada8b7b00a3305351a3fb222782d8033a400a48eca48" default))
  '(gnutls-algorithm-priority "normal:-vers-tls1.3")
  '(package-selected-packages
-   '(sdlang-mode company-dcd d-mode nim-mode dashboard htmlize vterm yaml-mode dart-mode multiple-cursors terra-mode lua-mode zig-mode elfeed company-go go-projectile go-mode counsel zenburn-theme rainbow-delimiters diff-hl crux rustic move-text god-mode expand-region ido-completing-read+ do-completing-read+ dap-java flycheck-gradle groovy-imports groovy-mode java-imports java-snippets which-key magit rust-mode markdown-mode blue-sea use-package slime-company org))
+   '(gotest gotest.el sdlang-mode company-dcd d-mode nim-mode dashboard htmlize vterm yaml-mode dart-mode multiple-cursors terra-mode lua-mode zig-mode elfeed company-go go-projectile go-mode counsel zenburn-theme rainbow-delimiters diff-hl crux rustic move-text god-mode expand-region ido-completing-read+ do-completing-read+ dap-java flycheck-gradle groovy-imports groovy-mode java-imports java-snippets which-key magit rust-mode markdown-mode blue-sea use-package slime-company org))
  '(warning-suppress-types '((use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
