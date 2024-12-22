@@ -2,7 +2,5 @@ j11 > /dev/null
 alias jb '~/programming/projects/jb/build/bin/jb $*'
 alias jbuild 'java -jar ~/programming/projects/jbuild/build/jbuild.jar $*'
 alias rawhttp 'java -jar ~/programming/apps/rawhttp-jdk17.jar $*'
-
+(progn (setenv "TERM" "xterm-256color") nil)
 setenv "PATH" (concat (shell-command-to-string "$SHELL --login -c 'echo -n $PATH'") ":~/.pub-cache/bin") > /dev/null
-
-(propertize "==============================" 'font-lock-face '(:foreground "yellow" :background "blue"))
