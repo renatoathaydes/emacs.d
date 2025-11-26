@@ -103,11 +103,13 @@
 ;; better way to switch between open windows
 (use-package ace-window :bind ("C-<tab>" . 'ace-window))
 (use-package ivy
-  :bind (("\C-s" . 'swiper))
+  :bind (("\C-s" . 'swiper)
+         ("M-q" . 'swiper-query-replace)
+         ("s-e" . 'ivy-switch-buffer))
   :init (ivy-mode))
 (use-package counsel :after (ivy))
-;;(use-package multiple-cursors
-;;  :bind (("s-;" . 'mc/edit-lines)))
+(use-package multiple-cursors
+ :bind (("s-;" . 'mc/edit-lines)))
 
 ;; God mode (modal editing)
 (defun my-god-mode-update-cursor-type ()
@@ -206,9 +208,15 @@
   :config
   (dashboard-setup-startup-hook))
 
+(use-package gptel
+  :config
+  (setq gptel-api-key (lambda () (getenv "CHAT_GPT_KEY")))
+  (gptel-make-gemini "Gemini" :key (lambda () (getenv "GEMINI_KEY")) :stream t))
+
 (provide 'init)
 (load "~/.emacs.d/functions")
 (load "~/.emacs.d/my-unison-mode")
+(load "~/.emacs.d/defstart-syntax")
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
