@@ -13,6 +13,13 @@
                          ("melpa" . "https://melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")))
 
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
 (require 'bind-key)
 
 (put 'erase-buffer 'disabled nil)
@@ -79,8 +86,6 @@
 (global-set-key (kbd "M-s-l") 'eglot-format-buffer)
 
 ;;; External packages
-
-(setq use-package-always-ensure t)
 
 ;; auto-complete inside text/code buffers
 (use-package company :init (global-company-mode t))
@@ -178,10 +183,6 @@
 (use-package go-mode
   :hook ((go-mode . (lambda () (setq tab-width 4)))))
 
-;; Inserts code snippets
-(use-package yasnippet :init (yas-global-mode 1)
-  :bind (("C-j" . yas-insert-snippet)))
-
 ;; Crux provides a few helpful basic functions
 (use-package crux
   :bind (("C-a" . crux-move-beginning-of-line)
@@ -216,7 +217,7 @@
 (provide 'init)
 (load "~/.emacs.d/functions")
 (load "~/.emacs.d/my-unison-mode")
-(load "~/.emacs.d/defstart-syntax")
+;; (load "~/.emacs.d/defstart-syntax")
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
