@@ -1,3 +1,7 @@
+;;; custom.el --- my custom settings -*- lexical-binding: t; -*-
+
+;;; Commentary:
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -7,10 +11,14 @@
    [default default default italic underline success warning error])
  '(custom-enabled-themes '(misterioso))
  '(custom-safe-themes
-   '("3b8284e207ff93dfc5e5ada8b7b00a3305351a3fb222782d8033a400a48eca48" default))
+   '("3b8284e207ff93dfc5e5ada8b7b00a3305351a3fb222782d8033a400a48eca48"
+     default))
  '(gnutls-algorithm-priority "normal:-vers-tls1.3")
  '(package-selected-packages
-   '(gotest gotest.el sdlang-mode company-dcd d-mode nim-mode dashboard htmlize vterm yaml-mode dart-mode multiple-cursors terra-mode lua-mode zig-mode elfeed company-go go-projectile go-mode counsel zenburn-theme rainbow-delimiters diff-hl crux rustic move-text god-mode expand-region ido-completing-read+ do-completing-read+ dap-java flycheck-gradle groovy-imports groovy-mode java-imports java-snippets which-key magit rust-mode markdown-mode blue-sea use-package slime-company org))
+   '(ace-window counsel crux d-mode dart-mode dashboard diff-hl elfeed
+                expand-region flycheck go-mode god-mode gotest gptel
+                groovy-mode lua-mode magit move-text multiple-cursors
+                nim-mode rustic slime-company yaml-mode zig-mode))
  '(warning-suppress-types '((use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -33,3 +41,5 @@
  '(org-level-6 ((t (:inherit default :weight bold :foreground "Grey" :font "Lucida Grande"))))
  '(org-level-7 ((t (:inherit default :weight bold :foreground "Grey" :font "Lucida Grande"))))
  '(org-level-8 ((t (:inherit default :weight bold :foreground "Grey" :font "Lucida Grande")))))
+
+;;; custom.el ends here

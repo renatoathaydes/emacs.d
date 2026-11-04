@@ -1,4 +1,4 @@
-;;; package --- Summary
+;;; package --- Summary  -*- lexical-binding: t; -*-
 ;;; Unison code syntax highlighter.
 
 ;; Copyright © 2023, by Renato Athaydes

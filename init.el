@@ -1,4 +1,4 @@
-;;; init.el --- Renato's Emacs init file
+;;; init.el --- Renato's Emacs init file  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -16,6 +16,8 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/autoload"))
 
 (require 'use-package)
 (setq use-package-always-ensure t)
@@ -60,7 +62,7 @@
 (global-unset-key (kbd "C-j"))
 (setq inferior-lisp-program (if (eq system-type 'gnu/linux)
                                 "/usr/bin/sbcl"
-                              "/usr/local/bin/sbcl"))
+                              "/opt/homebrew/bin/sbcl"))
 
 ;; enable recentf to display recently visited files
 (recentf-mode 1)
@@ -84,6 +86,7 @@
 (global-set-key (kbd "<backtab>") 'indent-rigidly-left-to-tab-stop)
 
 (global-set-key (kbd "M-s-l") 'eglot-format-buffer)
+(global-set-key (kbd "<f1>") 'eldoc)
 
 ;;; External packages
 
@@ -211,12 +214,20 @@
 
 (use-package gptel
   :config
-  (setq gptel-api-key (lambda () (getenv "CHAT_GPT_KEY")))
-  (gptel-make-gemini "Gemini" :key (lambda () (getenv "GEMINI_KEY")) :stream t))
+  (let* ((model "anthropic/claude-haiku-5-5")
+         (backend (gptel-make-openai "Requesty"
+                    :host "router.requesty.ai"
+                    :key (lambda () (gptel-api-key-from-auth-source "router.requesty.ai"))
+                    :models (list model)
+                    :stream t)))
+    (setq gptel-backend backend
+          gptel-model model))
+  (require 'gptel-functions))
 
 (provide 'init)
 (load "~/.emacs.d/functions")
 (load "~/.emacs.d/my-unison-mode")
+(load "~/.emacs.d/my-modes/jprocess-mode")
 ;; (load "~/.emacs.d/defstart-syntax")
 
 (setq custom-file "~/.emacs.d/custom.el")

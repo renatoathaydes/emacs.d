@@ -1,4 +1,4 @@
-;;; functions.el --- My functions.
+;;; functions.el --- My functions.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023 Renato Athaydes
 
@@ -46,10 +46,11 @@
 ;; Helpful functions (available everywhere, including eshell)
 (defun j11 ()
   "Use Java 11."
-  (setenv "JAVA_HOME" (expand-file-name "~/.sdkman/candidates/java/11.0.13-zulu")))
-(defun j17 ()
-  "Use Java 17."
-  (setenv "JAVA_HOME" (expand-file-name "/~.sdkman/candidates/java/17.0.5-zulu")))
+  (setenv "JAVA_HOME" (expand-file-name "~/.sdkman/candidates/java/11.0.30-tem")))
+
+(defun j25 ()
+  "Use Java 25."
+  (setenv "JAVA_HOME" (expand-file-name "~/.sdkman/candidates/java/25.0.2-tem")))
 
 (provide 'functions)
 ;;; functions.el ends here
