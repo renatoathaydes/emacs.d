@@ -85,10 +85,3 @@
    - `M-x`      :: run command
    - `C-u M-x`  :: run command with arguments
 
-** LSP Common
-
-   - `C-c C-c`    :: comment region
-   - `C-x C;`     :: comment line
-   - `C-x C-h`    :: show docs
-   - `C-x h`      :: move to docs when showing
-   - `M-l a a`    :: invoke code action
