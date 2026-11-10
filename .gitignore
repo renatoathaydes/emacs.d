@@ -8,6 +8,7 @@
 !renato-eclipse-formatting.xml
 !functions.el
 !my-unison-mode.el
+!autoload/*
 
 !*/
 elpa/
