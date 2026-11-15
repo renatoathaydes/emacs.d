@@ -128,7 +128,14 @@
   :config (add-hook 'post-command-hook #'my-god-mode-update-cursor-type)
   :init (god-mode))
 
-(use-package gotest)
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns))
+    (setq exec-path-from-shell-arguments '("-l"))
+    (exec-path-from-shell-initialize)))
+
+;;(use-package gotest)
 
 ;; SLIME
 (use-package slime
@@ -166,7 +173,12 @@
 
 ;; (add-hook 'dart-mode-hook 'lsp)
 ;; Dart
-(use-package dart-mode)
+(use-package dart-mode
+  :config
+  (add-hook 'eglot-managed-mode-hook
+            (lambda ()
+              (when (derived-mode-p 'dart-mode)
+                (eglot-inlay-hints-mode -1)))))
 
 ;; ZIG
 (use-package zig-mode
@@ -214,11 +226,11 @@
 
 (use-package gptel
   :config
-  (let* ((model "anthropic/claude-haiku-5-5")
+  (let* ((model 'anthropic/claude-haiku-5-5)
          (backend (gptel-make-openai "Requesty"
                     :host "router.requesty.ai"
                     :key (lambda () (gptel-api-key-from-auth-source "router.requesty.ai"))
-                    :models (list model)
+    :models (list model)
                     :stream t)))
     (setq gptel-backend backend
           gptel-model model))
@@ -227,7 +239,7 @@
 (provide 'init)
 (load "~/.emacs.d/functions")
 (load "~/.emacs.d/my-unison-mode")
-(load "~/.emacs.d/my-modes/jprocess-mode")
+;;(load "~/.emacs.d/my-modes/jprocess-mode")
 ;; (load "~/.emacs.d/defstart-syntax")
 
 (setq custom-file "~/.emacs.d/custom.el")
