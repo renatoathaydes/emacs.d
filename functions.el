@@ -52,5 +52,16 @@
   "Use Java 25."
   (setenv "JAVA_HOME" (expand-file-name "~/.sdkman/candidates/java/25.0.2-tem")))
 
+(defun define-cl-function-type ()
+  "Insert a Common Lisp declaim for function types."
+  (interactive)
+  (let* ((name (string-trim (read-string "Function name: ")))
+         (args (split-string (read-string "Argument types (space-separated): ") "[ \t]+" t))
+         (ret (string-trim (read-string "Return type (default t): ")))
+         (ret (if (string-empty-p ret) "t" ret))
+         (arg-spec (mapconcat #'identity args " ")))
+    (insert (format "(declaim (ftype (function (%s) %s) %s))\n"
+                    arg-spec ret name))))
+
 (provide 'functions)
 ;;; functions.el ends here
